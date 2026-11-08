@@ -5,7 +5,7 @@ const { generateAnswer } = require("./services/generate");
 
 async function main() {
   const question = "What is the company's revenue or financial performance?";
-  // ^ change this to test different questions
+
 
   const records = loadStore();
   const queryVector = await embedText(question);

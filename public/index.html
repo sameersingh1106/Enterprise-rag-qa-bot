@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7fb">
+  <title>Northstar — Document intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/views.css">
+  <link rel="stylesheet" href="/upload.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="Northstar home"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 14.4 9.6 21.2 12l-6.8 2.4L12 21.2l-2.4-6.8L2.8 12l6.8-2.4L12 2.8Z"/><circle cx="12" cy="12" r="2.1"/></svg></span><span>northstar</span></a>
+      <div class="workspace-menu-wrap">
+        <button class="workspace-switch" id="workspace-toggle" type="button" aria-expanded="false" aria-controls="workspace-menu">
+          <span class="workspace-avatar">W</span><span class="switch-copy"><strong>My workspace</strong><span>Personal</span></span><span class="chevrons">⌄</span>
+        </button>
+        <div class="workspace-menu" id="workspace-menu" hidden>
+          <div class="menu-heading">MY WORKSPACE</div>
+          <button type="button" data-view="ask"><span>◈</span><span>Ask documents</span></button>
+          <button type="button" data-view="documents"><span>▤</span><span>Documents</span></button>
+          <button type="button" data-view="evaluations"><span>▥</span><span>Evaluations</span></button>
+          <button type="button" data-view="settings"><span>⚙</span><span>Settings</span></button>
+          <div class="menu-foot"><i></i> Local workspace</div>
+        </div>
+      </div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <div class="nav-caption">WORKSPACE</div>
+        <button class="nav-item active" type="button" data-view="ask" aria-current="page"><span class="nav-icon">◈</span>Ask documents</button>
+        <button class="nav-item" type="button" data-view="documents"><span class="nav-icon">▤</span>Documents</button>
+        <button class="nav-item" type="button" data-view="evaluations"><span class="nav-icon">▥</span>Evaluations</button>
+        <div class="nav-caption nav-caption-spaced">PREFERENCES</div>
+        <button class="nav-item" type="button" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="plan-card"><div class="plan-icon">✦</div><strong>Build your knowledge base</strong><p>Upload a PDF to add it to your searchable document index.</p><button class="plan-link" type="button" data-view="documents">Add a document <b>Open library ↗</b></button></div>
+        <div class="profile"><div class="profile-avatar">S</div><div><strong>Workspace owner</strong><span>Local demo</span></div><span class="profile-menu">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><button id="menu-toggle" class="mobile-menu" aria-label="Toggle navigation">☰</button><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb-title">Ask documents</strong></div><div class="top-actions"><span class="connection"><i></i> Local workspace</span><button class="help-button" aria-label="Help" title="Answers are generated from indexed PDFs">?</button></div></header>
+      <div class="content-wrap" id="content-wrap">
+       <div class="view" id="ask-view">
+        <section class="page-heading"><div><div class="overline">DOCUMENT INTELLIGENCE</div><h1>Ask your knowledge base</h1><p>Get clear answers from your documents, with the evidence to back them up.</p></div><div class="index-chip"><span class="chip-icon">▤</span><span><strong>PDF knowledge base</strong><small>Indexed content</small></span><span class="chip-dot"></span></div></section>
+        <div class="work-grid">
+          <section class="chat-panel" aria-label="Ask your documents">
+            <div class="panel-heading"><div><h2>Ask a question</h2><p>Answers are grounded in retrieved passages.</p></div><span class="model-badge"><i></i> AI assistant</span></div>
+            <div id="conversation" class="conversation">
+              <div class="welcome-card" id="welcome-card"><div class="welcome-symbol">✳</div><h3>What would you like to know?</h3><p>Ask a question about the PDFs you’ve indexed. Your answer will include source passages for review.</p><div class="suggestions-label">TRY A QUESTION</div><div class="suggestions"><button type="button" class="suggestion">What are the key takeaways?</button><button type="button" class="suggestion">Summarize the main findings</button><button type="button" class="suggestion">What risks are mentioned?</button></div></div>
+              <div id="message" class="message" role="status" aria-live="polite"></div>
+              <section id="result" class="result" hidden aria-live="polite"><div class="user-question"><span class="user-avatar">S</span><div><div class="bubble-label">YOUR QUESTION</div><p id="asked-question"></p></div></div><div class="assistant-answer"><div class="assistant-avatar">✳</div><div class="answer-content"><div class="answer-title">ANSWER <span class="answer-tag">Based on your documents</span></div><div id="answer" class="answer"></div><div class="sources-head"><h3>Sources</h3><span id="source-count"></span></div><div id="sources" class="sources"></div></div></div></section>
+            </div>
+            <form id="ask-form" class="composer"><label class="sr-only" for="question">Your question</label><textarea id="question" rows="2" maxlength="2000" placeholder="Ask a question about your documents…" required></textarea><div class="composer-bottom"><span><kbd>↵</kbd> to ask <span class="key-divider">·</span> <kbd>⇧ ↵</kbd> for a new line</span><button id="ask-button" type="submit"><span class="button-star">✳</span><span class="button-label">Ask question</span><span aria-hidden="true">↗</span></button></div></form>
+            <div class="privacy-note"><span>◇</span> Responses are generated from your indexed content. Verify important details in the source passages.</div>
+          </section>
+
+          <aside class="context-panel">
+            <div class="context-head"><div class="context-icon">▧</div><div><div class="context-overline">YOUR LIBRARY</div><h2>Knowledge base</h2></div><button class="more-button" title="More options">···</button></div>
+            <div class="library-summary"><div class="summary-number">PDF</div><div><strong>Local document index</strong><span>Content from your ingestion run</span></div></div>
+            <div class="divider"></div>
+            <div class="section-title">IN THIS WORKSPACE <span id="doc-count">—</span></div>
+            <div id="sidebar-documents"><div class="document-row"><div class="pdf-icon">PDF</div><div class="document-copy"><strong>Loading index…</strong><span>Checking indexed documents</span></div></div></div>
+            <div class="divider"></div>
+            <div class="section-title">UP NEXT</div>
+            <div class="roadmap-item"><span class="roadmap-number">01</span><span><strong>Page-level citations</strong><small>Jump to a supporting page</small></span></div>
+            <div class="roadmap-item"><span class="roadmap-number">02</span><span><strong>Benchmark suite</strong><small>Track answer quality over time</small></span></div>
+            <div class="context-footer"><span class="green-dot"></span> Local development workspace</div>
+          </aside>
+        </div>
+        <footer class="page-footer"><span>Northstar <b>·</b> Document intelligence demo</span><span>Built for evidence-led answers</span></footer>
+       </div>
+       <section class="view secondary-view" id="documents-view" hidden></section>
+       <section class="view secondary-view" id="evaluations-view" hidden></section>
+       <section class="view secondary-view" id="settings-view" hidden></section>
+      </div>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
